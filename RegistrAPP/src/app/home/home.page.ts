@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -9,15 +9,17 @@ import { ToastController } from '@ionic/angular';
 })
 export class HomePage {
 
+  //dejamos username y password sin definir para usarlos a conveniencia, serán declarados dentro del if las validaciones
   tituloSuperior: string;
   tituloInferior: string;
   mensajeBienvenida: string;
   mensajeCredenciales: string;
   username!: string;
   password!: string;
-
-  constructor
-  (private router: Router, 
+ 
+  
+  constructor(
+    private router: Router, 
     private toastController: ToastController,)
    {
     this.tituloSuperior = 'RegistrAPP';
@@ -25,5 +27,51 @@ export class HomePage {
     this.mensajeBienvenida = 'Bienvenido a RegistrAPP';
     this.mensajeCredenciales = 'Ingrese sus credenciales';
    }
+
+   //ahora creamos las funciones para el login del los usuarios
+
+   //esta es para entrar con las credenciales
+   validarSesion(){
+     if(this.username === 'admin' && this.password === '12345'){
+      this.showToastMessage('Inicio de sesión exitoso', 'success');
+      //this.mensajeBienvenida= `Bienvenido ${this.username}`;
+
+      const extras: NavigationExtras = {
+
+        state: {
+          user: this.username,
+          }
+        }
+        this.router.navigate(['/portal'], extras);
+      
+
+       } else {
+        this.showToastMessage('Inicio de sesión fallido', 'danger');
+     }
+   }
+
+
+   // esta funcion es para recuperar la contraseña al no saberla
+
+   recuperarContrasena(){
+     this.showToastMessage('Sigue los pasos para recuperar tú contraseña', 'warning');
+     this.router.navigate(['/recuperacion']);
+   }
+  
+  
+
+
+
+  
+   async showToastMessage(text: string, msgColor: string) {
+     const toast = await this.toastController.create({
+        message: text,
+        duration: 3000,
+        color: msgColor,
+        position: 'bottom'
+      }) 
+      toast.present();
+
+  }
 
 }

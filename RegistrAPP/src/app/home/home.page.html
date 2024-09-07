@@ -8,24 +8,41 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-card>
-    
   
-  <ion-header class="ion-text-center ion-no-border">
-    <ion-toolbar>
-      <ion-title size="large">{{mensajeBienvenida}}</ion-title>
-      <h6>{{mensajeCredenciales}}</h6>
-    </ion-toolbar> 
-  </ion-header> 
 
-  <ion-list>
-    <ion-item>
-      <ion-input label="USUARIO" placeholder="Ingrese su nombre de usuario"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input label="CONTRASEÑA" type="password" placeholder="Ingrese su contraseña" ></ion-input>
-    </ion-item>
-  </ion-list>
+  <ion-card>
+    <ion-header class="ion-text-center ion-no-border">
+      <ion-toolbar>
+        <ion-title size="large">{{mensajeBienvenida}}</ion-title>
+        <h6>{{mensajeCredenciales}}</h6>
+      </ion-toolbar> 
+    </ion-header> 
+  </ion-card>
 
+
+
+  <ion-card>
+
+    <ion-list>
+      <ion-item>
+        <ion-input [(ngModel)]="username" label="USUARIO" placeholder="Ingrese su nombre de usuario" labelPlacement="floating"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input [(ngModel)]="password"  label="CONTRASEÑA" type="password" placeholder="Ingrese su contraseña" labelPlacement="floating"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-button expand="block" color="primary" (click)="validarSesion()">Ingresar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      
+      <ion-button expand="block" color="secondary" (click)="recuperarContrasena()">Recuperar contraseña</ion-button>
+    </ion-card-content>
   </ion-card>
 </ion-content>
