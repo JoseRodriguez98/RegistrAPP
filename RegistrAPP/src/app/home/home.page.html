@@ -17,6 +17,7 @@
         <h6>{{mensajeCredenciales}}</h6>
       </ion-toolbar> 
     </ion-header> 
+    <img alt="Silhouette of mountains" class="center" src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Logo_DuocUC.svg" />
   </ion-card>
 
 
@@ -25,10 +26,10 @@
 
     <ion-list>
       <ion-item>
-        <ion-input [(ngModel)]="username" label="USUARIO" placeholder="Ingrese su nombre de usuario" labelPlacement="floating"></ion-input>
+        <ion-input [(ngModel)]="username" label="Usuario" placeholder="Ingrese su nombre de usuario" labelPlacement="floating"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-input [(ngModel)]="password"  label="CONTRASEÑA" type="password" placeholder="Ingrese su contraseña" labelPlacement="floating"></ion-input>
+        <ion-input [(ngModel)]="password"  label="Contraseña" type="password" placeholder="Ingrese su contraseña" labelPlacement="floating"></ion-input>
       </ion-item>
     </ion-list>
 
@@ -41,8 +42,8 @@
 
   <ion-card>
     <ion-card-content>
-      
-      <ion-button expand="block" color="secondary" (click)="recuperarContrasena()">Recuperar contraseña</ion-button>
+      <ion-button expand="block" color="warning" (click)="recuperarContrasena()">¿Olvidaste tú contraseña?</ion-button>
     </ion-card-content>
   </ion-card>
+
 </ion-content>

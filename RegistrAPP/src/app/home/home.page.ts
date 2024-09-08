@@ -14,6 +14,7 @@ export class HomePage {
   tituloInferior: string;
   mensajeBienvenida: string;
   mensajeCredenciales: string;
+  mensajeDeBienvenidaNombre!: string;
   username!: string;
   password!: string;
  
@@ -35,6 +36,7 @@ export class HomePage {
      if(this.username === 'admin' && this.password === '12345'){
       this.showToastMessage('Inicio de sesión exitoso', 'success');
       //this.mensajeBienvenida= `Bienvenido ${this.username}`;
+      this.mensajeDeBienvenidaNombre = `Bienvenido ${this.username}`;
 
       const extras: NavigationExtras = {
 
@@ -57,11 +59,6 @@ export class HomePage {
      this.showToastMessage('Sigue los pasos para recuperar tú contraseña', 'warning');
      this.router.navigate(['/recuperacion']);
    }
-  
-  
-
-
-
   
    async showToastMessage(text: string, msgColor: string) {
      const toast = await this.toastController.create({
