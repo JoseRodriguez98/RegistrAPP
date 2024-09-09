@@ -9,7 +9,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class HomePage {
 
-  //dejamos username y password sin definir para usarlos a conveniencia, serán declarados dentro del if las validaciones
+  //dejamos password sin definir para usarlos a conveniencia, serán declarados dentro del if las validaciones
   tituloSuperior: string;
   tituloInferior: string;
   mensajeBienvenida: string;
@@ -33,10 +33,8 @@ export class HomePage {
 
    //esta es para entrar con las credenciales
    validarSesion(){
-     if(this.username === 'admin' && this.password === '12345'){
+     if(this.username === 'jojrodriguez' && this.password === '12345'){
       this.showToastMessage('Inicio de sesión exitoso', 'success');
-      //this.mensajeBienvenida= `Bienvenido ${this.username}`;
-      this.mensajeDeBienvenidaNombre = `Bienvenido ${this.username}`;
 
       const extras: NavigationExtras = {
 
