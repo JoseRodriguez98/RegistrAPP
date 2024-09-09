@@ -1,6 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title background-color="warning">Recuperación de contraseña</ion-title>
+    <ion-title>Recuperación de contraseña</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="irLogin()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -9,9 +14,7 @@
   <ion-card>
     <ion-list>
       <ion-text>
-        <h1 class="serious-text">Escribe tú nombre de usuario de Duoc, se te enviará un correo con una contraseña temporal para
-          que puedas ingresar a la aplicación.
-        </h1>
+        <h1 class="serious-text">Escribe tú nombre de usuario de Duoc, se te enviará a tú correo institucional una contraseña temporal con la que podrás ingresar a la aplicación.</h1>
       </ion-text>
     </ion-list>
   </ion-card>

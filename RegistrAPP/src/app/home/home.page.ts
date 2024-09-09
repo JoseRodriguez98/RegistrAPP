@@ -54,7 +54,7 @@ export class HomePage {
    // esta funcion es para recuperar la contraseña al no saberla
 
    recuperarContrasena(){
-     this.showToastMessage('Sigue los pasos para recuperar tú contraseña', 'warning');
+     this.showToastMessage('Sigue las instrucciones para recuperar tú contraseña', 'warning');
      this.router.navigate(['/recuperacion']);
    }
   

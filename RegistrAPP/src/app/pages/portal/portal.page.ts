@@ -19,6 +19,10 @@ export class PortalPage implements OnInit {
     }
   }
 
+  irLogin(){
+    this.router.navigate(['/home']);
+  }
+
   ngOnInit() {
   }
 

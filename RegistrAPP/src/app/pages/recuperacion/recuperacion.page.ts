@@ -16,6 +16,10 @@ export class RecuperacionPage implements OnInit {
     private toastController: ToastController,
   ) { }
 
+  irLogin(){
+    this.router.navigate(['/home']);
+  }
+
   validarRecuperacion(){
     if(this.username === 'jojrodriguez'){
      this.showToastMessage('Recuperacion exitosa, correo enviado!', 'success');
