@@ -14,6 +14,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; //para 
 import { FormsModule } from '@angular/forms'; //para firestore
 import { HttpClientModule } from '@angular/common/http';
 
+import { IonicStorageModule } from '@ionic/storage-angular';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,
@@ -21,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireAuthModule,
     CommonModule,  // Agrega esto si no está presente
     AngularFirestoreModule,
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

@@ -34,6 +34,9 @@ export class AuthService {
     return this.afAuth.signOut();
   }
 
+  getCurrentUser(): Observable<any> {
+    return this.afAuth.authState;
+  }
   
   // Obtener el usuario autenticado
 
