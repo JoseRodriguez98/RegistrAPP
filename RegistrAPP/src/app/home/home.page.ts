@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { AuthService } from '../services/auth.service'; //importamos el servicio de autenticación
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
 
   //dejamos password sin definir para usarlos a conveniencia, serán declarados dentro del if las validaciones
@@ -15,24 +17,42 @@ export class HomePage {
   mensajeBienvenida: string;
   mensajeCredenciales: string;
   mensajeDeBienvenidaNombre!: string;
-  username!: string;
-  password!: string;
+  correo: string = '';
+  password: string = '';
+
  
   
   constructor(
     private router: Router, 
-    private toastController: ToastController,)
+    private toastController: ToastController,
+    private authService: AuthService)
    {
     this.tituloSuperior = 'RegistrAPP';
     this.tituloInferior = 'DuocUC - Sede San Joaquín';
     this.mensajeBienvenida = 'Bienvenido a RegistrAPP';
     this.mensajeCredenciales = 'Ingrese sus credenciales';
    }
+   
 
    //ahora creamos las funciones para el login del los usuarios
+     async login() {
+      try {
+        await this.authService.login(this.correo, this.password); // Llamar al servicio de autenticación de auth.service.ts
+        this.showToastMessage('Inicio de sesión exitoso', 'success');
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Espera 2 segundos antes de redirigir
+        this.goToPortal();
+      } catch (error) {
+        this.showToastMessage('Inicio de sesión fallido', 'danger');
+        console.error('Error al iniciar sesión', error);
+      }
+  }
 
+  goToPortal() {
+    window.location.href = '/portal'; // Redirige y recarga la página
+  }
    //esta es para entrar con las credenciales
-   validarSesion(){
+
+   /*validarSesion(){
      if(this.username === 'jojrodriguez' && this.password === '12345'){
       this.showToastMessage('Inicio de sesión exitoso', 'success');
 
@@ -49,12 +69,13 @@ export class HomePage {
         this.showToastMessage('Inicio de sesión fallido', 'danger');
      }
    }
-
+*/
 
    // esta funcion es para recuperar la contraseña al no saberla
 
-   recuperarContrasena(){
+   async recuperarContrasena(){
      this.showToastMessage('Sigue las instrucciones para recuperar tú contraseña', 'warning');
+     await new Promise(resolve => setTimeout(resolve, 2000));
      this.router.navigate(['/recuperacion']);
    }
   
