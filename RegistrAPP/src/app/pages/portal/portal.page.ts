@@ -7,6 +7,8 @@ import { ToastController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http'; // Importar HttpClient
 import * as L from 'leaflet'; // Importar Leaflet
 import { Geolocation } from '@capacitor/geolocation'; // Importar Capacitor Geolocation
+import { StorageService } from '../../services/storage.service'; 
+
 
 @Component({
   selector: 'app-portal',
@@ -23,6 +25,7 @@ export class PortalPage implements OnInit {
   direccion: string | null = null;
   posicionError: string | null = null;
   map: any; // variable para almacenar el mapa de Leaflet
+  userEmail: string = '';
 
   constructor(
               private router: Router,
@@ -30,7 +33,8 @@ export class PortalPage implements OnInit {
               private menuCtrl: MenuController,
               private authService: AuthService,
               private toastController: ToastController,
-              private http: HttpClient
+              private http: HttpClient,
+              private storageService: StorageService
   ) { 
     
   }
@@ -81,6 +85,12 @@ export class PortalPage implements OnInit {
 
     // Llamar a la función para obtener la geolocalización
     this.getGeolocation();
+
+    this.authService.getCurrentUser().subscribe(user => {
+      if (user) {
+        this.userEmail = user.email;
+      }
+    });
   }
 
   async showToastMessage(text: string, msgColor: string) {
@@ -136,6 +146,18 @@ export class PortalPage implements OnInit {
         const marker = L.marker([this.latitud, this.longitud]).addTo(this.map);
         marker.bindPopup('¡Estás aquí!').openPopup();
       }
+    }
+
+    async guardarLocalizacion() {
+      const ubicacion = {
+        latitud: this.latitud,
+        longitud: this.longitud,
+        direccion: this.direccion,
+        fechaHora: new Date().toLocaleString()  
+      };
+      await this.storageService.set(`ubicacion_${this.userEmail}`, ubicacion);
+      this.showToastMessage('Ultima ubicación guardada con éxito', 'tertiary');
+      
     }
 
 }
