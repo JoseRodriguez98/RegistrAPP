@@ -11,6 +11,16 @@ export class AuthService {
 
   constructor(private afAuth:AngularFireAuth, private firestore: AngularFirestore) { }
 
+  // Método para enviar correo de restablecimiento de contraseña, es propio de Firebase asi que nos sirve perfecto
+  async sendPasswordResetEmail(email: string): Promise<void> {
+    try {
+      await this.afAuth.sendPasswordResetEmail(email);
+      console.log('Correo de restablecimiento enviado.');
+    } catch (error) {
+      throw new Error('No se pudo enviar el correo de restablecimiento.');
+    }
+  }
+
   async login(correo:string, password:string){
     return this.afAuth.signInWithEmailAndPassword(correo, password);
   }

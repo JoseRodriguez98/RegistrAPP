@@ -17,11 +17,12 @@ import { Geolocation } from '@capacitor/geolocation'; // Importar Capacitor Geol
 export class PortalPage implements OnInit {
   
   nombreCompleto: string | null = ' ';
+  //esta 4 son para el posicionamiento de la api de la geolocalización
   latitud: number = 0;
   longitud: number = 0;
   direccion: string | null = null;
   posicionError: string | null = null;
-  map: any; // Variable para almacenar el mapa de Leaflet
+  map: any; // variable para almacenar el mapa de Leaflet
 
   constructor(
               private router: Router,

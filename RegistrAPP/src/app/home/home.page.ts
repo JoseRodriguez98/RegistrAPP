@@ -47,9 +47,9 @@ export class HomePage {
       }
   }
 
-  goToPortal() {
-    window.location.href = '/portal'; // Redirige y recarga la página
-  }
+      goToPortal() {
+        window.location.href = '/portal'; // Redirige y recarga la página
+      }
    //esta es para entrar con las credenciales
 
    /*validarSesion(){
