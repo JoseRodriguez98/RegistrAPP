@@ -1,14 +1,16 @@
 
 <ion-content class="body" [fullscreen]="true">
   
-
+  <ion-card></ion-card>
   <ion-card>
     <ion-header class="ion-text-center ion-no-border">
       <ion-toolbar>
-        <ion-title size="large" class="responsive-title">{{mensajeBienvenida}}</ion-title>
+        <ion-title size="large" class="responsive-title" style="display: flex; align-items: center;" >
+          {{mensajeBienvenida}}  <img src="assets/logo.png" alt="Logo" style="max-width: 50px; max-height: 50px; margin-left: 10px;"/>
+        </ion-title>  
       </ion-toolbar> 
     </ion-header> 
-    <img alt="Silhouette of mountains" class="center" src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Logo_DuocUC.svg" />
+    <img alt="logo duoc" class="center" src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Logo_DuocUC.svg" />
   </ion-card>
 
 
