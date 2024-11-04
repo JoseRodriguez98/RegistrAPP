@@ -3,11 +3,13 @@ import { Router } from '@angular/router';
 import { AnimationController} from '@ionic/angular';
 import { MenuController } from '@ionic/angular';
 import { AuthService } from '../../services/auth.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http'; // Importar HttpClient
 import * as L from 'leaflet'; // Importar Leaflet
 import { Geolocation } from '@capacitor/geolocation'; // Importar Capacitor Geolocation
 import { StorageService } from '../../services/storage.service'; 
+import { AlertController } from '@ionic/angular';
+
 
 
 @Component({
@@ -34,7 +36,9 @@ export class PortalPage implements OnInit {
               private authService: AuthService,
               private toastController: ToastController,
               private http: HttpClient,
-              private storageService: StorageService
+              private storageService: StorageService,
+              private alertController: AlertController,
+              private loadingController: LoadingController
   ) { 
     
   }
@@ -58,9 +62,11 @@ export class PortalPage implements OnInit {
   }*/
 
   async logOut() {
+    const loading = await this.showLoading();
     // Aquí puedes implementar la lógica para cerrar sesión, como limpiar tokens, cerrar sesión en un servicio, etc.
     console.log('Sesión cerrada');
     this.authService.logout(); // Cerrar sesión con el servicio de autenticación
+    loading.dismiss();
     this.showToastMessage('Haz cerrado tú sesión', 'warning');
     await new Promise(resolve => setTimeout(resolve, 2000));
     // Redireccionar al usuario a la página de inicio de sesión, por ejemplo:
@@ -168,16 +174,46 @@ export class PortalPage implements OnInit {
       }
     }
 
+    async showLoading() {
+      const loading = await this.loadingController.create({
+        message: 'Cargando...',
+        duration: 2000
+      });
+      await loading.present();
+      return loading;
+    }
+
+
     async guardarLocalizacion() {
-      const ubicacion = {
-        latitud: this.latitud,
-        longitud: this.longitud,
-        direccion: this.direccion,
-        fechaHora: new Date().toLocaleString()  
-      };
-      await this.storageService.set(`ubicacion_${this.userEmail}`, ubicacion);
-      this.showToastMessage('Ultima ubicación guardada con éxito', 'tertiary');
-      
+      const alert = await this.alertController.create({
+        header: 'Confirmar acción',
+        message: '¿Estás seguro de que deseas guardar la ubicación actual?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              console.log('Acción cancelada');
+            }
+          },
+          {
+            text: 'Confirmar',
+            handler: async () => {
+              // Código para guardar la ubicación si el usuario confirma
+              const ubicacion = {
+                latitud: this.latitud,
+                longitud: this.longitud,
+                direccion: this.direccion,
+                fechaHora: new Date().toLocaleString()
+              };
+              await this.storageService.set(`ubicacion_${this.userEmail}`, ubicacion);
+              this.showToastMessage('Última ubicación guardada con éxito', 'tertiary');
+            }
+          }
+        ]
+      });
+    
+      await alert.present();
     }
 
 }

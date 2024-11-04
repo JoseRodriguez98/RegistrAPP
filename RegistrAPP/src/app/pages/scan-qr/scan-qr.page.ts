@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StorageService } from '../../services/storage.service'; 
 import { AuthService } from '../../services/auth.service';
 import { ToastController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-scan-qr',
   templateUrl: './scan-qr.page.html',
@@ -22,11 +22,13 @@ export class ScanQrPage implements OnInit {
   constructor(
     private storageService: StorageService,
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private router: Router
   ) {}
 
   async volverPortal() {
-    window.location.href = '/portal'; // Redirige y recarga la página
+    //window.location.href = '/portal'; // Redirige y recarga la página
+    this.router.navigate(['/portal']);
   }
 
   ngOnInit() {

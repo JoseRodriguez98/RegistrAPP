@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service'; //importamos el servicio de autenticación
-import { LoadingService } from '../services/loading.service';
+
 
 @Component({
   selector: 'app-home',
@@ -27,7 +27,7 @@ export class HomePage {
     private router: Router, 
     private toastController: ToastController,
     private authService: AuthService,
-    private loadingService: LoadingService)
+    private loadingController: LoadingController,)
    {
     this.tituloSuperior = 'RegistrAPP';
     this.tituloInferior = 'DuocUC - Sede San Joaquín';
@@ -38,22 +38,24 @@ export class HomePage {
 
    //ahora creamos las funciones para el login del los usuarios
      async login() {
-      this.loadingService.show();
+
+      const loading = await this.showLoading();
       try {
         await this.authService.login(this.correo, this.password); // Llamar al servicio de autenticación de auth.service.ts
+        loading.dismiss();
         this.showToastMessage('Inicio de sesión exitoso', 'success');
-        await new Promise(resolve => setTimeout(resolve, 2000)); // Espera 2 segundos antes de redirigir
+        await new Promise(resolve => setTimeout(resolve, 1500)); // Espera 2 segundos antes de redirigir
         this.goToPortal();
       } catch (error) {
         this.showToastMessage('Inicio de sesión fallido', 'danger');
+        loading.dismiss();
         console.error('Error al iniciar sesión', error);
-      } finally {
-        this.loadingService.hide(); // Ocultamos el indicador de carga en ambos casos (éxito o error)
-      }
+      } 
   }
 
       goToPortal() {
-        window.location.href = '/portal'; // Redirige y recarga la página
+        //window.location.href = '/portal'; // Redirige y recarga la página
+        this.router.navigate(['/portal']);
       }
    //esta es para entrar con las credenciales
 
@@ -93,6 +95,15 @@ export class HomePage {
       }) 
       toast.present();
 
+  }
+
+  async showLoading() {
+    const loading = await this.loadingController.create({
+      message: 'Cargando...',
+      duration: 2000
+    });
+    await loading.present();
+    return loading;
   }
 
 }
