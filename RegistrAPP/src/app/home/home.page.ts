@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service'; //importamos el servicio de autenticación
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,8 @@ export class HomePage {
   constructor(
     private router: Router, 
     private toastController: ToastController,
-    private authService: AuthService)
+    private authService: AuthService,
+    private loadingService: LoadingService)
    {
     this.tituloSuperior = 'RegistrAPP';
     this.tituloInferior = 'DuocUC - Sede San Joaquín';
@@ -36,6 +38,7 @@ export class HomePage {
 
    //ahora creamos las funciones para el login del los usuarios
      async login() {
+      this.loadingService.show();
       try {
         await this.authService.login(this.correo, this.password); // Llamar al servicio de autenticación de auth.service.ts
         this.showToastMessage('Inicio de sesión exitoso', 'success');
@@ -44,6 +47,8 @@ export class HomePage {
       } catch (error) {
         this.showToastMessage('Inicio de sesión fallido', 'danger');
         console.error('Error al iniciar sesión', error);
+      } finally {
+        this.loadingService.hide(); // Ocultamos el indicador de carga en ambos casos (éxito o error)
       }
   }
 

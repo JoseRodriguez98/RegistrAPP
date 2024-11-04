@@ -69,6 +69,8 @@ export class PortalPage implements OnInit {
   }
 
   ngOnInit() {
+    this.requestLocationPermission();
+
     this.authService.getUser().subscribe(
       user => {
         if (user && user.length > 0) {
@@ -91,7 +93,25 @@ export class PortalPage implements OnInit {
         this.userEmail = user.email;
       }
     });
+
+
   }
+
+    // Función para solicitar permisos y obtener ubicación
+    async requestLocationPermission() {
+      try {
+        // Solicitar permisos de geolocalización
+        const permission = await Geolocation.requestPermissions();
+        if (permission.location === 'granted') {
+          this.getGeolocation();
+        } else {
+          console.log('Permisos de geolocalización no otorgados');
+        }
+      } catch (error) {
+        console.error('Error solicitando permisos de geolocalización:', error);
+      }
+    }
+  
 
   async showToastMessage(text: string, msgColor: string) {
     const toast = await this.toastController.create({

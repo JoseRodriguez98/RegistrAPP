@@ -8,6 +8,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from '../environments/environment'; //para firestore
+
 import { AngularFireModule } from '@angular/fire/compat'; //para firestore
 import { AngularFireAuthModule } from '@angular/fire/compat/auth'; //para firestore
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; //para firestore
@@ -16,8 +17,12 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { IonicStorageModule } from '@ionic/storage-angular';
 
+import { LoadingComponent } from './loading/loading.component';
+
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,
+    LoadingComponent,],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,FormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
