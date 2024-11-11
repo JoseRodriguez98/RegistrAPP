@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Escaneo QR</ion-title>
+    <ion-title style="background-color: #daac05; color: white; font-weight: bold; display: flex; align-items: center; padding: 10px;">
+      Escaneo de código QR
+      <img src="assets/logo.png" alt="Logo" style="width: 1em; height: 1em; margin-left: 10px;" />
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="volverPortal()">
         <ion-icon name="arrow-back" style="font-size: 1.5em;"></ion-icon>
@@ -39,9 +42,22 @@
 
 <ion-card>
 <ion-card-content>
-  <ion-button expand="full" [disabled]="isButtonDisabled">
+  <!--recuerda volver aagregar la validacion del tiempo-->
+  <ion-button expand="full" class="submit"  (click)="startScan()" [disabled]="isButtonDisabled" > 
     Registrar asistencia con QR
   </ion-button>
+
+ <ion-item class="result" *ngIf="scanResult" lines="none" >
+  <ion-label>
+    <p>
+    Resultado scaner
+    </p>
+    <div>
+      {{scanResult}}
+    </div>
+    </ion-label>
+  
+</ion-item>
 </ion-card-content>
 </ion-card>
 

@@ -68,10 +68,10 @@ export class PortalPage implements OnInit {
     this.authService.logout(); // Cerrar sesión con el servicio de autenticación
     loading.dismiss();
     this.showToastMessage('Haz cerrado tú sesión', 'warning');
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await new Promise(resolve => setTimeout(resolve, 1100));
     // Redireccionar al usuario a la página de inicio de sesión, por ejemplo:
     /*this.router.navigate(['/login']);*/
-    window.location.href = '/home';
+    this.router.navigate(['/home']);
   }
 
   ngOnInit() {
