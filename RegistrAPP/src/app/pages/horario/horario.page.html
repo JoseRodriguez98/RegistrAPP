@@ -1,12 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title style="background-color: #daac05; color: white; font-weight: bold; display: flex; align-items: center; padding: 10px;">
-      Horario
-      <img src="assets/logo.png" alt="Logo" style="width: 1em; height: 1em; margin-left: 10px;" />
+    <ion-title>
+      <div class="header-container">
+        <span class="header-title">Horario</span>
+        <img src="assets/logo.png" alt="Logo" class="logo" />
+      </div>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="volverPortal()">
-        <ion-icon name="arrow-back" style="font-size: 1.5em;"></ion-icon>
+      <ion-button class="back-button" (click)="volverPortal()">
+        <ion-icon name="arrow-back" style="color: black;"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -19,34 +21,41 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Título principal del horario -->
-  <ion-grid>
-    <!-- Títulos de las columnas -->
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="background-color: #f8c471; font-weight: bold; text-align: center; border: 1px solid #ccc;">Hora</ion-col>
-      <ion-col style="background-color: #82e0aa; font-weight: bold; text-align: center; border: 1px solid #ccc;">Lunes</ion-col>
-      <ion-col style="background-color: #85c1e9; font-weight: bold; text-align: center; border: 1px solid #ccc;">Martes</ion-col>
-      <ion-col style="background-color: #f7dc6f; font-weight: bold; text-align: center; border: 1px solid #ccc;">Miércoles</ion-col>
-      <ion-col style="background-color: #d2b4de; font-weight: bold; text-align: center; border: 1px solid #ccc;">Jueves</ion-col>
-      <ion-col style="background-color: #f1948a; font-weight: bold; text-align: center; border: 1px solid #ccc;">Viernes</ion-col>
-      
-    </ion-row>
-  
-    <!-- Filas de horario -->
-    <ng-container *ngFor="let bloque of bloques; let i = index">
-      <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-        <!-- Bloque de tiempo -->
-        <ion-col style="text-align: center; border: 1px solid #ccc;">{{ bloque }}</ion-col>
-  
-        <!-- Clases por día -->
-        <ng-container *ngFor="let dia of dias">
-          <ion-col style="text-align: center; border: 1px solid #ccc;">
-            {{ horarioEstructurado[dia][i] || '' }}
-          </ion-col>
-        </ng-container>
+  <div class="schedule-container">
+    <!-- Título principal del horario -->
+    <h2 class="schedule-title">Tú Horario de Clases</h2>
+
+    <ion-grid class="schedule-table">
+      <!-- Títulos de las columnas -->
+      <ion-row class="table-header">
+        <ion-col>Hora</ion-col>
+        <ion-col>Lunes</ion-col>
+        <ion-col>Martes</ion-col>
+        <ion-col>Miércoles</ion-col>
+        <ion-col>Jueves</ion-col>
+        <ion-col>Viernes</ion-col>
       </ion-row>
-    </ng-container>
-  </ion-grid>
- <ion-card><ion-button (click)="descargarPdf()">Descargar horario PDF</ion-button></ion-card>
-  
+
+      <!-- Filas de horario -->
+      <ng-container *ngFor="let bloque of bloques; let i = index">
+        <ion-row class="table-row">
+          <!-- Bloque de tiempo -->
+          <ion-col>{{ bloque }}</ion-col>
+
+          <!-- Clases por día -->
+          <ng-container *ngFor="let dia of dias">
+            <ion-col>{{ horarioEstructurado[dia][i] || '' }}</ion-col>
+          </ng-container>
+        </ion-row>
+      </ng-container>
+    </ion-grid>
+
+    <ion-row class="download-row">
+      <ion-col>
+        <ion-button expand="block"  (click)="descargarPdf()">
+          Descargar horario en PDF
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
 </ion-content>

@@ -1,34 +1,36 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" style="background-color: grey;">
   <ion-toolbar>
-    <ion-title style="background-color: #daac05; color: white; font-weight: bold; display: flex; align-items: center; padding: 10px;">
-      Portal de asistencias
-      <img src="assets/logo.png" alt="Logo" style="width: 1em; height: 1em; margin-left: 10px;" />
+    <ion-title>
+      <div class="header-container">
+        <span class="header-title">Portal de asistencias</span>
+        <img src="assets/logo.png" alt="Logo" class="logo" />
+      </div>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="logOut()">
-        <ion-icon name="log-out" style="font-size: 1.5em;"></ion-icon>
+      <ion-button class="logout-button" (click)="logOut()">
+        <ion-icon name="log-out" style="color: black;"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+  <ion-list class="welcome-message">
     <ion-item>
-      <ion-title class="ion-text-center"  style="font-family: 'Arial Black', Gadget, sans-serif; font-size: 1.2em; color: gray;">Bienvenid&#64; {{ nombreCompleto }}</ion-title>
+      <ion-title class="ion-text-center">Bienvenid&#64; {{ nombreCompleto }}</ion-title>
     </ion-item>
   </ion-list>
 
   <ion-grid>
     <ion-row>
       <ion-col size="6">
-        <ion-button expand="block" class="button-box" color="primary" (click)="registrarAsistencia()">
+        <ion-button expand="block" class="button-box primary" (click)="registrarAsistencia()">
           <ion-icon name="qr-code" slot="start"></ion-icon>
           <ion-label>Registrar asistencia</ion-label>
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button expand="block" class="button-box" color="primary" (click)="irHorario()">
+        <ion-button expand="block" class="button-box primary" (click)="irHorario()">
           <ion-icon name="calendar" slot="start"></ion-icon>
           <ion-label>Mi horario</ion-label>
         </ion-button>
@@ -36,13 +38,13 @@
     </ion-row>
     <ion-row>
       <ion-col size="6">
-        <ion-button expand="block" class="button-box" color="primary" (click)="irMisAsistencias()">
+        <ion-button expand="block" class="button-box primary" (click)="irMisAsistencias()">
           <ion-icon name="document" slot="start"></ion-icon>
           <ion-label>Mis asistencias</ion-label>
         </ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button expand="block" class="button-box" color="primary" (click)="irConfiguracion()">
+        <ion-button expand="block" class="button-box secondary" (click)="irConfiguracion()">
           <ion-icon name="school" slot="start"></ion-icon>
           <ion-label>Portales DuocUC</ion-label>
         </ion-button>
@@ -50,7 +52,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card style="background-color: #daac05">
+  <ion-card class="location-card">
     <ion-card-header>
       <ion-card-title>Ubicación Actual</ion-card-title>
     </ion-card-header>
@@ -72,13 +74,15 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card style="background-color: #3423b1; ">
+  <ion-card class="map-card">
     <ion-card-header>
-      <ion-card-title style="color: white;">Mapa de Ubicación</ion-card-title>
+      <ion-card-title>Mapa de Ubicación</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <div id="map" style="height: 300px; border: 1px solid #ccc; border-radius: 8px;"></div>
-      <ion-button expand="block" (click)="guardarLocalizacion()">Guardar Localización</ion-button>
+      <div id="map"></div>
+      <ion-button expand="block" class="button-box primary" (click)="guardarLocalizacion()">
+        Guardar Localización
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

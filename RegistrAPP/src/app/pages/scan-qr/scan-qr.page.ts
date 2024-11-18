@@ -63,24 +63,36 @@ export class ScanQrPage implements OnInit {
   }
 
   ngOnInit(): void {
-
+    // Verificar permisos de cámara
     if (this.platform.is('capacitor')) {
-      BarcodeScanner.isSupported().then();
-      BarcodeScanner.checkPermissions().then();
-      BarcodeScanner.removeAllListeners();
+      BarcodeScanner.checkPermissions().then((permissionStatus: { camera: string }) => {
+        if (permissionStatus.camera !== 'granted') {
+          BarcodeScanner.requestPermissions().then(() => {
+            console.log('Permisos de cámara otorgados.');
+          }).catch((err) => {
+            console.error('Error al solicitar permisos:', err);
+          });
+        }
+      }).catch((err) => {
+        console.error('Error al verificar permisos:', err);
+      });
     }
-
-    this.authService.getCurrentUser().subscribe(user => {
+  
+    // Obtener información del usuario actual
+    this.authService.getCurrentUser().subscribe((user: { email: string } | null) => {
       if (user) {
+        console.log('Usuario autenticado:', user);
         this.userEmail = user.email;
         this.loadStoredLocation();
         this.checkTimeAndShowToast();
+      } else {
+        console.warn('No se encontró un usuario autenticado.');
       }
+    }, (err) => {
+      console.error('Error al obtener usuario:', err);
     });
-
-      
-   
   }
+  
 
   async loadStoredLocation() {
     this.ubicacion = await this.storageService.get(`ubicacion_${this.userEmail}`);
@@ -100,9 +112,9 @@ export class ScanQrPage implements OnInit {
   checkTimeAndShowToast() {
     const currentTime = new Date();
     const startTime = new Date();
-    startTime.setHours(8, 30, 0); // 08:30 hrs
+    startTime.setHours(4, 30, 0); // 08:30 hrs -> startTime.setHours(8, 30, 0);
     const endTime = new Date();
-    endTime.setHours(18, 50, 0); // 18:50 hrs
+    endTime.setHours(18, 50, 0); // 18:50 hrs -> endTime.setHours(18, 50, 0);
 
     if (currentTime >= startTime && currentTime <= endTime) {
       this.presentToast('Está dentro de un horario permitido', 'success');

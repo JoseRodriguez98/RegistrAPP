@@ -1,21 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title style="background-color: #daac05; color: white; font-weight: bold; display: flex; align-items: center; padding: 10px;">
-      Portales DuocUC
-      <img src="assets/logo.png" alt="Logo" style="width: 1em; height: 1em; margin-left: 10px;" />
+    <ion-title>
+      <div class="header-container">
+        <span class="header-title">Portales Duoc UC</span>
+        <img src="assets/logo.png" alt="Logo" class="logo" />
+      </div>
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="volverPortal()">
-        <ion-icon name="arrow-back" style="font-size: 1.5em;"></ion-icon>
+      <ion-button class="back-button" (click)="volverPortal()">
+        <ion-icon name="arrow-back" style="color: black;"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">configuracion</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="portal-container">
+    <h2>Accede a Nuestros Portales</h2>
+    <ion-list class="portal-list">
+      <ion-item class="portal-item">
+        <a href="https://campusvirtual.duoc.cl/" target="_blank">
+          <ion-icon name="desktop" slot="start"></ion-icon>
+          Ir al AVA
+        </a>
+      </ion-item>
+      <ion-item class="portal-item">
+        <a href="https://experienciavivo.duoc.cl/" target="_blank">
+          <ion-icon name="happy" slot="start"></ion-icon>
+          Ir a VivoDuoc
+        </a>
+      </ion-item>
+      <ion-item class="portal-item">
+        <a href="https://www.duoc.cl/" target="_blank">
+          <ion-icon name="school" slot="start"></ion-icon>
+          Ir a Duoc.cl
+        </a>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

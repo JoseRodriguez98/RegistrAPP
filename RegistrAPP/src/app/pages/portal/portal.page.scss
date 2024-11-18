@@ -1,0 +1,121 @@
+:host {
+    // Header Estilizado
+    ion-header {
+      --background: linear-gradient(90deg, #daac05, #f0c30b);
+      box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  
+      .header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+  
+        .header-title {
+          font-size: 1.8em;
+          font-weight: bold;
+          color: white;
+        }
+  
+        .logo {
+          width: 2.5em;
+          height: 2.5em;
+        }
+      }
+  
+      .logout-button {
+        ion-icon {
+          font-size: 1.8em;
+          color: white;
+        }
+  
+        &:hover {
+          transform: scale(1.1);
+          transition: transform 0.2s ease-in-out;
+        }
+      }
+    }
+  
+    // Contenido Principal
+    ion-content {
+      --background: #f9f9f9;
+  
+      .welcome-message {
+        margin-top: 20px;
+  
+        ion-title {
+          font-family: 'Arial Black', sans-serif;
+          font-size: 1.5em;
+          color: #333;
+          text-transform: capitalize;
+        }
+      }
+  
+      ion-grid {
+        padding: 20px;
+  
+        .button-box {
+          font-size: 1.2em;
+          font-weight: bold;
+          border-radius: 8px;
+          text-transform: capitalize;
+  
+          ion-icon {
+            font-size: 1.5em;
+          }
+  
+          &.primary {
+            --background: #daac05;
+            --color: white;
+  
+            &:hover {
+              --background: #f0c30b;
+            }
+          }
+  
+          &.secondary {
+            --background: #3423b1;
+            --color: white;
+  
+            &:hover {
+              --background: #4a45d1;
+            }
+          }
+        }
+      }
+  
+      .location-card {
+        background: #daac05;
+        color: white;
+        margin-top: 20px;
+  
+        ion-card-title {
+          font-size: 1.3em;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+  
+        ion-label {
+          font-size: 1.1em;
+        }
+      }
+  
+      .map-card {
+        background: #3423b1;
+        color: white;
+        margin-top: 20px;
+  
+        ion-card-title {
+          font-size: 1.3em;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+  
+        #map {
+          height: 300px;
+          border: 1px solid white;
+          border-radius: 8px;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+  
