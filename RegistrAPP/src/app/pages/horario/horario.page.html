@@ -21,13 +21,7 @@
 
   <!-- Título principal del horario -->
   <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <h1 style="text-align: center; font-weight: bold; margin-top: 10px;">Mi Horario de clases</h1>
-      </ion-col>
-    </ion-row>
-
-    <!-- Encabezados de la tabla de horario -->
+    <!-- Títulos de las columnas -->
     <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
       <ion-col style="background-color: #f8c471; font-weight: bold; text-align: center; border: 1px solid #ccc;">Hora</ion-col>
       <ion-col style="background-color: #82e0aa; font-weight: bold; text-align: center; border: 1px solid #ccc;">Lunes</ion-col>
@@ -35,144 +29,24 @@
       <ion-col style="background-color: #f7dc6f; font-weight: bold; text-align: center; border: 1px solid #ccc;">Miércoles</ion-col>
       <ion-col style="background-color: #d2b4de; font-weight: bold; text-align: center; border: 1px solid #ccc;">Jueves</ion-col>
       <ion-col style="background-color: #f1948a; font-weight: bold; text-align: center; border: 1px solid #ccc;">Viernes</ion-col>
-      <ion-col style="background-color: #a9cce3; font-weight: bold; text-align: center; border: 1px solid #ccc;">Sábado</ion-col>
+      
     </ion-row>
-
-    <!-- Filas de la tabla con intervalos de horas -->
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">08:30 - 09:10</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">09:10 - 09:50</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">10:00 - 10:40</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">10:40 - 11:20</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">11:30 - 12:10</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">12:10 - 12:50</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">13:00 - 13:40</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">13:40 - 14:20</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">14:30 - 15:10</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">15:10 - 15:50</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">16:00 - 16:40</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">16:40 - 17:20</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">17:20 - 18:00</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-    <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
-      <ion-col style="text-align: center; border: 1px solid #ccc;">18:10 - 18:50</ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-      <ion-col style="border: 1px solid #ccc;"></ion-col>
-    </ion-row>
-
-    <!-- Botón para descargar el horario en PDF se viene: (click)="descargarPDF()" cuando aprenda a integrar la conversion a pdf-->
-    <ion-row>
-      <ion-col size="12" style="text-align: center; margin-top: 20px;">
-        <ion-button color="primary" expand="block" >
-          Descargar Horario en PDF
-        </ion-button>
-      </ion-col>
-    </ion-row>
+  
+    <!-- Filas de horario -->
+    <ng-container *ngFor="let bloque of bloques; let i = index">
+      <ion-row style="border: 1px solid #ccc; border-collapse: collapse;">
+        <!-- Bloque de tiempo -->
+        <ion-col style="text-align: center; border: 1px solid #ccc;">{{ bloque }}</ion-col>
+  
+        <!-- Clases por día -->
+        <ng-container *ngFor="let dia of dias">
+          <ion-col style="text-align: center; border: 1px solid #ccc;">
+            {{ horarioEstructurado[dia][i] || '' }}
+          </ion-col>
+        </ng-container>
+      </ion-row>
+    </ng-container>
   </ion-grid>
+ <ion-card><ion-button (click)="descargarPdf()">Descargar horario PDF</ion-button></ion-card>
+  
 </ion-content>

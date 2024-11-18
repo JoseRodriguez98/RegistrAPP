@@ -19,7 +19,8 @@ import { AlertController } from '@ionic/angular';
 })
 
 export class PortalPage implements OnInit {
-  
+
+  horario: any;
   nombreCompleto: string | null = ' ';
   //esta 4 son para el posicionamiento de la api de la geolocalización
   latitud: number = 0;
@@ -78,16 +79,26 @@ export class PortalPage implements OnInit {
     this.requestLocationPermission();
 
     this.authService.getUser().subscribe(
-      user => {
-        if (user && user.length > 0) {
-          this.nombreCompleto = user[0].nombreCompleto;
+      async (userData) => {
+        console.log('Datos completos del usuario:', userData);
+        if (userData && userData.length > 0) {
+          const usuario = userData[0]; // Suponiendo que el correo es único
+          this.nombreCompleto = usuario.nombreCompleto; // Establecer el nombre del usuario
+          const horario = usuario.horario;
+  
+          if (horario) {
+            // Guardar el horario en el Storage
+            await this.storageService.set('horario', horario);
+            console.log('Horario guardado en el Storage:', horario);
+          } else {
+            console.warn('El usuario no tiene un horario definido.');
+          }
         } else {
-          this.nombreCompleto = 'Usuario';
+          console.error('No se encontraron datos para el usuario autenticado.');
         }
       },
-      error => {
-        console.error('Error al obtener el usuario:', error);
-        this.nombreCompleto = 'Usuario';
+      (error) => {
+        console.error('Error al obtener los datos del usuario:', error);
       }
     );
 

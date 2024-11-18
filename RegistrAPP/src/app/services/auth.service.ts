@@ -43,7 +43,7 @@ export class AuthService {
   getUser(): Observable<any> {
     return this.afAuth.authState.pipe(
       switchMap(user => {
-        console.log(user); // Agregar este log
+        console.log('Usuario autenticado en authState:',user); // Agregar este log
         if (user) {
           // Si el usuario está autenticado, buscamos su información en Firestore
           return this.firestore.collection('users', ref => ref.where('correo', '==', user.email))
@@ -54,4 +54,11 @@ export class AuthService {
       })
     );
   }
+
+  getHorario(uid: string) {
+    return this.firestore.collection('users').doc(uid).valueChanges();
+  }
+
+
+  
 }
