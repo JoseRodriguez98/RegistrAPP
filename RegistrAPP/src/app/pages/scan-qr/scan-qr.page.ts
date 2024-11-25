@@ -5,7 +5,9 @@ import { ModalController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { BarcodeScanningModalComponent } from './barcode-scanning-modal.component';
-import { LensFacing, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { LensFacing } from '@capacitor-mlkit/barcode-scanning';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { Browser } from '@capacitor/browser';
 @Component({
   selector: 'app-scan-qr',
   templateUrl: './scan-qr.page.html',
@@ -22,7 +24,7 @@ export class ScanQrPage implements OnInit {
   userEmail: string = '';
   isButtonDisabled: boolean = false;
 
-  scanResult = '';
+  scannedData: any;
 
   constructor(
     private storageService: StorageService,
@@ -35,26 +37,7 @@ export class ScanQrPage implements OnInit {
 
 
 
-  async startScan() {
-    const modal = await this.modalController.create({
-    component: BarcodeScanningModalComponent,
-    cssClass: 'barcode-scanning-modal',
-    showBackdrop: false,
-    componentProps: { 
-      formats: [],
-      LensFacing: LensFacing.Back
-     }
-    });
-  
-    await modal.present();
 
-    const { data } = await modal.onWillDismiss();
-
-    if(data){
-      this.scanResult = data?.barcode?.displayValue;
-    }
-    
-  }
 
 
   async volverPortal() {
@@ -64,19 +47,6 @@ export class ScanQrPage implements OnInit {
 
   ngOnInit(): void {
     // Verificar permisos de cámara
-    if (this.platform.is('capacitor')) {
-      BarcodeScanner.checkPermissions().then((permissionStatus: { camera: string }) => {
-        if (permissionStatus.camera !== 'granted') {
-          BarcodeScanner.requestPermissions().then(() => {
-            console.log('Permisos de cámara otorgados.');
-          }).catch((err) => {
-            console.error('Error al solicitar permisos:', err);
-          });
-        }
-      }).catch((err) => {
-        console.error('Error al verificar permisos:', err);
-      });
-    }
   
     // Obtener información del usuario actual
     this.authService.getCurrentUser().subscribe((user: { email: string } | null) => {
@@ -124,4 +94,34 @@ export class ScanQrPage implements OnInit {
       this.isButtonDisabled = true;
     }
   }
+
+
+
+///////
+scanQRCode() {
+  BarcodeScanner.checkPermission({ force: true }).then((status) => {
+    if (status.granted) {
+      BarcodeScanner.hideBackground(); // Oculta el fondo durante el escaneo
+      BarcodeScanner.startScan().then(async (result) => {
+        BarcodeScanner.showBackground(); // Vuelve a mostrar el fondo después del escaneo
+        if (result.hasContent) {
+          let url = result.content.trim();
+          if (!url.startsWith('http://') && !url.startsWith('https://')) {
+            url = 'https://' + url; // Asegura que tenga un esquema válido
+          }
+          await Browser.open({ url }); // Abre el navegador con el URL
+        } else {
+          console.log('No se encontró contenido en el código QR.');
+        }
+      }).catch((err) => {
+        console.error('Error al escanear QR:', err);
+        BarcodeScanner.showBackground();
+      });
+    } else {
+      console.log('Permiso denegado para usar la cámara.');
+    }
+});
+}
+///////
+
 }

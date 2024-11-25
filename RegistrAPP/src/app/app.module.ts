@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
+
 import { CommonModule } from '@angular/common'; // Asegúrate de que está importado
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
@@ -13,7 +14,9 @@ import { FormsModule } from '@angular/forms'; //para firestore
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { LoadingComponent } from './loading/loading.component';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { FirebaseModule } from './firebase.module'; // Importa el nuevo módulo
+
+//import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 
 @NgModule({
@@ -28,9 +31,10 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     CommonModule,  // Agrega esto si no está presente
     AngularFirestoreModule,
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    FirebaseModule, // Agrega el módulo FirebaseModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, BarcodeScanner],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

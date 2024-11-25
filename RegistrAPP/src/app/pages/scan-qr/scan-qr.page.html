@@ -42,11 +42,12 @@
 
 <ion-card>
 <ion-card-content>
-  <!--recuerda volver aagregar la validacion del tiempo-->
+  <!--recuerda volver aagregar la validacion del tiempo
   <ion-button expand="full" class="submit"  (click)="startScan()" [disabled]="isButtonDisabled" > 
     Registrar asistencia con QR
-  </ion-button>
-
+  </ion-button>-->
+  <ion-button (click)="scanQRCode()">Escanear QR</ion-button>
+ <!--
  <ion-item class="result" *ngIf="scanResult" lines="none" >
   <ion-label>
     <p>
@@ -57,7 +58,7 @@
     </div>
     </ion-label>
   
-</ion-item>
+</ion-item>-->
 </ion-card-content>
 </ion-card>
 

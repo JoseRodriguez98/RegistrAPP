@@ -31,6 +31,12 @@
       <ion-col style="background-color: #85c1e9; font-weight: bold; text-align: center; border: 1px solid #ccc;">SALA</ion-col>
       <ion-col style="background-color: #f7dc6f; font-weight: bold; text-align: center; border: 1px solid #ccc;">FECHA</ion-col>
     </ion-row>
-    <!--A futuro cuando solucione lo del qr podre ver como poblar aca -->
+    <ion-row *ngFor="let asistencia of asistencia$ | async">
+      <ion-col style="text-align: center; border: 1px solid #ccc;">{{ asistencia.materia }}</ion-col>
+      <ion-col style="text-align: center; border: 1px solid #ccc;">{{ asistencia.seccion }}</ion-col>
+      <ion-col style="text-align: center; border: 1px solid #ccc;">{{ asistencia.sala }}</ion-col>
+      <ion-col style="text-align: center; border: 1px solid #ccc;">{{ asistencia.fecha }}</ion-col>
+    </ion-row>
   </ion-grid>
+  
 </ion-content>
