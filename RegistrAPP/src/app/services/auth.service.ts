@@ -24,6 +24,7 @@ export class AuthService {
   async login(correo:string, password:string){
     return this.afAuth.signInWithEmailAndPassword(correo, password);
   }
+  
 
   //al final no piden esto
   async register(correo:string, password:string){
@@ -47,6 +48,21 @@ export class AuthService {
         if (user) {
           // Si el usuario está autenticado, buscamos su información en Firestore
           return this.firestore.collection('users', ref => ref.where('correo', '==', user.email))
+            .valueChanges({ idField: 'id' });
+        } else {
+          return of(null); // Si no hay usuario autenticado, devolvemos null
+        }
+      })
+    );
+  }
+
+  getProfe(): Observable<any> {
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        console.log('Usuario autenticado en authState:',user); // Agregar este log
+        if (user) {
+          // Si el usuario está autenticado, buscamos su información en Firestore
+          return this.firestore.collection('profesores', ref => ref.where('correo', '==', user.email))
             .valueChanges({ idField: 'id' });
         } else {
           return of(null); // Si no hay usuario autenticado, devolvemos null

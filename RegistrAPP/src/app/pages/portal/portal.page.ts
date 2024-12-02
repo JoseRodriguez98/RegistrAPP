@@ -30,6 +30,7 @@ export class PortalPage implements OnInit {
   map: any; // variable para almacenar el mapa de Leaflet
   userEmail: string = '';
 
+
   constructor(
               private router: Router,
               private animationCtrl: AnimationController,
@@ -61,6 +62,7 @@ export class PortalPage implements OnInit {
   /*irLogin(){
     this.router.navigate(['/home']);
   }*/
+ 
 
   async logOut() {
     const loading = await this.showLoading();

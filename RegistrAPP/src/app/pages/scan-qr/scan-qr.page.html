@@ -13,6 +13,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+    <!-- BOTÓN "X" PARA DETENER EL ESCÁNER -->
+    <ion-button
+    *ngIf="isScanning" class="close-scan-button" (click)="stopScan()">
+    <ion-icon name="close-outline" color="warning"></ion-icon>
+  </ion-button>
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Registrar asistencia</ion-title>
@@ -47,6 +54,16 @@
     Registrar asistencia con QR
   </ion-button>-->
   <ion-button (click)="scanQRCode()">Escanear QR</ion-button>
+
+    <!-- Mostrar el resultado del escaneo -->
+    <ion-card *ngIf="scanResult">
+      <ion-card-header>
+        <ion-card-title>Resultado del escaneo</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        {{ scanResult }}
+      </ion-card-content>
+    </ion-card>
  <!--
  <ion-item class="result" *ngIf="scanResult" lines="none" >
   <ion-label>

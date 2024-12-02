@@ -2,6 +2,14 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { AuthService } from '../services/auth.service'; //importamos el servicio de autenticación
+import { AnimationController} from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
+
+import { HttpClient } from '@angular/common/http'; // Importar HttpClient
+import * as L from 'leaflet'; // Importar Leaflet
+import { Geolocation } from '@capacitor/geolocation'; // Importar Capacitor Geolocation
+import { StorageService } from '../services/storage.service'; 
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -20,18 +28,24 @@ export class HomePage {
   mensajeDeBienvenidaNombre!: string;
   correo: string = '';
   password: string = '';
+  tipo = '';
 
  
   
   constructor(
-    private router: Router, 
-    private toastController: ToastController,
+    private router: Router,
+    private animationCtrl: AnimationController,
+    private menuCtrl: MenuController,
     private authService: AuthService,
-    private loadingController: LoadingController,)
+    private toastController: ToastController,
+    private http: HttpClient,
+    private storageService: StorageService,
+    private alertController: AlertController,
+    private loadingController: LoadingController)
    {
     this.tituloSuperior = 'RegistrAPP';
     this.tituloInferior = 'DuocUC - Sede San Joaquín';
-    this.mensajeBienvenida = 'Bienvenido a RegistrAPP';
+    this.mensajeBienvenida = 'Bienvenido!';
     this.mensajeCredenciales = 'Ingrese sus credenciales';
    }
    
@@ -45,7 +59,7 @@ export class HomePage {
         loading.dismiss();
         this.showToastMessage('Inicio de sesión exitoso', 'success');
         await new Promise(resolve => setTimeout(resolve, 1500)); // Espera 2 segundos antes de redirigir
-        this.goToPortal();
+        this.verificarAcceso();
       } catch (error) {
         this.showToastMessage('Inicio de sesión fallido', 'danger');
         loading.dismiss();
@@ -104,6 +118,35 @@ export class HomePage {
     });
     await loading.present();
     return loading;
+  }
+
+  irLoginProf(){
+    this.router.navigate(['/profesor-login']);
+  }
+
+  async verificarAcceso() {
+    try {
+      this.authService.getUser().subscribe(user => {
+        if (user && user.length > 0) {
+          this.tipo = user[0].tipo; // Asignar el tipo de usuario
+
+          if (this.tipo === '1') {
+            this.showToastMessage('Acceso permitido', 'success');
+            this.goToPortal();
+          } else {
+            this.showToastMessage('Acceso denegado', 'danger');
+          }
+        } else {
+          this.showToastMessage('Usuario no permitido', 'danger');
+        }
+      }, error => {
+        this.showToastMessage('Error al verificar acceso', 'danger');
+        console.error('Error al verificar acceso', error);
+      });
+    } catch (error) {
+      this.showToastMessage('Error al verificar acceso', 'danger');
+      console.error('Error al verificar acceso', error);
+    }
   }
 
 }

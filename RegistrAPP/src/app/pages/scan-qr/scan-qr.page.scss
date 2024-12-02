@@ -1,0 +1,11 @@
+.close-scan-button {
+    position: absolute; /* Se coloca encima de todo */
+    top: 10px; /* Espacio desde el borde superior */
+    right: 10px; /* Espacio desde el borde derecho */
+    z-index: 9999; /* Asegura que siempre esté por encima del resto */
+    background: rgba(255, 255, 255, 0.9); /* Fondo blanco con algo de transparencia */
+    color: red; /* Icono en color rojo */
+    border-radius: 50%; /* Botón redondo */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+  }
+  

@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">Inicia sesión como Docente</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="irLogin()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="login-content">
+  <!-- Imagen de Bienvenida -->
+  <div class="image-container">
+    <img src="assets/logo.png" alt="Logo Duoc" class="logo" />
+  </div>
+
+  <!-- Formulario de Inicio de Sesión -->
+  <div class="form-container">
+    <ion-card class="login-card">
+      <ion-card-header>
+        <ion-card-title class="ion-text-center">
+          Bienvenido Docente
+        </ion-card-title>
+        <ion-card-subtitle class="ion-text-center">
+          Ingresa tus credenciales
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-input
+              placeholder="Correo Institucional"
+              type="email"
+              [(ngModel)]="correo"
+              required
+            ></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+            <ion-input
+              placeholder="Contraseña"
+              type="password"
+              [(ngModel)]="password"
+              required
+            ></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button
+          expand="block"
+          color="primary"
+          class="login-button"
+          (click)="login()"
+        >
+          Ingresar
+        </ion-button>
+        <ion-button
+          expand="block"
+          fill="clear"
+          color="medium"
+          class="forgot-password"
+          (click)="recuperarContrasena()"
+        >
+          ¿Olvidaste tu contraseña?
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Pie de Página -->
+  <ion-footer>
+    <ion-toolbar>
+      <ion-title size="small" class="ion-text-center">
+        © 2024 Duoc UC | Todos los derechos reservados
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>

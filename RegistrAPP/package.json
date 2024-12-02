@@ -40,6 +40,7 @@
     "ionicons": "^7.0.0",
     "leaflet": "^1.9.4",
     "phonegap-plugin-barcodescanner": "^8.1.0",
+    "qrcode": "^1.5.4",
     "rxjs": "^6.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.2"
@@ -58,6 +59,7 @@
     "@ionic/angular-toolkit": "^11.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/leaflet": "^1.9.14",
+    "@types/qrcode": "^1.5.5",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.57.0",

@@ -43,9 +43,32 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
+    path: 'profesor-portal',
+    loadChildren: () => import('./pages/profesor-portal/profesor-portal.module').then( m => m.ProfesorPortalPageModule)
+  },
+  {
+    path: 'profesor-login',
+    loadChildren: () => import('./pages/profesor-login/profesor-login.module').then( m => m.ProfesorLoginPageModule)
+  },
+  {
+    path: 'profesor-generar-qr',
+    loadChildren: () => import('./pages/profesor-generar-qr/profesor-generar-qr.module').then( m => m.ProfesorGenerarQrPageModule)
+  },
+  {
+    path: 'profesor-ver-asistencias',
+    loadChildren: () => import('./pages/profesor-ver-asistencias/profesor-ver-asistencias.module').then( m => m.ProfesorVerAsistenciasPageModule)
+  },
+  {
+    path: 'profesor-ver-cursos',
+    loadChildren: () => import('./pages/profesor-ver-cursos/profesor-ver-cursos.module').then( m => m.ProfesorVerCursosPageModule)
+  },
+  {
     path: '**',
     loadChildren: () => import('./page-not-found/page-not-found.module').then( m => m.PageNotFoundPageModule)
   },
+  
+  
+  
   
 ];
 

@@ -1,0 +1,60 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Generar Asistencia QR</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/profesor-portal"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button color="primary" routerLink="/profesor-portal">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+        Volver al Portal
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="qr-content">
+  <div class="qr-container">
+    <!-- Mostrar información de la clase actual si existe -->
+    <div *ngIf="horarioActual; else sinClase">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Clase Actual</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Nombre:</strong> {{ horarioActual.nombreClase }}</p>
+          <p><strong>Sala:</strong> {{ horarioActual.sala }}</p>
+          <p><strong>Sección:</strong> {{ horarioActual.seccion }}</p>
+          <p><strong>Hora Actual:</strong> {{ horaActual }}</p>
+          <ion-button expand="block" color="primary" (click)="generarQR()">
+            Generar Código QR
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Plantilla para cuando no hay clase programada -->
+    <ng-template #sinClase>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Sin Clases Programadas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>No hay clases programadas para esta hora.</p>
+        </ion-card-content>
+      </ion-card>
+    </ng-template>
+
+    <!-- Mostrar el código QR generado -->
+    <div *ngIf="qrCodeData">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Código QR Generado</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <img [src]="qrCodeData" alt="Código QR Generado" />
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

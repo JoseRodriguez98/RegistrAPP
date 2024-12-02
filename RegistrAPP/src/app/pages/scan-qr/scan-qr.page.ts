@@ -23,8 +23,9 @@ export class ScanQrPage implements OnInit {
   };
   userEmail: string = '';
   isButtonDisabled: boolean = false;
-
+  isScanning: boolean = false; // Variable para mostrar la "X" y manejar el estado del escaneo.
   scannedData: any;
+  scanResult!: string;
 
   constructor(
     private storageService: StorageService,
@@ -95,10 +96,43 @@ export class ScanQrPage implements OnInit {
     }
   }
 
-
+  async scanQRCode() {
+    this.isScanning = true; // Activa el estado de escaneo y muestra la "X".
+  
+    // Solicitar permisos para la cámara
+    BarcodeScanner.checkPermission({ force: true }).then((status) => {
+      if (status.granted) {
+        BarcodeScanner.hideBackground(); // Oculta el fondo mientras se escanea
+  
+        // Iniciar el escaneo del QR
+        BarcodeScanner.startScan().then((result) => {
+          BarcodeScanner.showBackground(); // Restaura el fondo después del escaneo
+          this.isScanning = false; // Desactiva el estado de escaneo y oculta la "X".
+  
+          if (result.hasContent) {
+            this.scanResult = result.content.trim(); // Almacena el contenido del QR
+          } else {
+            this.scanResult = 'No se encontró contenido en el código QR.'; // Mensaje para QR vacío
+          }
+        }).catch((err) => {
+          console.error('Error al escanear QR:', err);
+          BarcodeScanner.showBackground(); // Restaura el fondo en caso de error
+          this.isScanning = false; // Detiene el estado de escaneo
+          this.scanResult = 'Error durante el escaneo.';
+        });
+      } else {
+        console.log('Permiso denegado para usar la cámara.');
+        this.isScanning = false; // Detiene el estado de escaneo
+        this.scanResult = 'Permiso denegado para usar la cámara.';
+      }
+    });
+  }
+  
 
 ///////
-scanQRCode() {
+/*
+async scanQRCode() {
+  this.isScanning = true; // Muestra la "X" para cancelar el escaneo
   BarcodeScanner.checkPermission({ force: true }).then((status) => {
     if (status.granted) {
       BarcodeScanner.hideBackground(); // Oculta el fondo durante el escaneo
@@ -122,6 +156,12 @@ scanQRCode() {
     }
 });
 }
+*/
 ///////
+async stopScan() {
+  this.isScanning = false; // Desactiva el estado del escaneo.
+  await BarcodeScanner.stopScan(); // Detiene el escaneo.
+  BarcodeScanner.showBackground(); // Restaura la interfaz de usuario.
+}
 
 }
